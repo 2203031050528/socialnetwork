@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Network</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/graphlib@2.1.1/dist/graphlib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+</head>
+<body>
+    <h1>Social Network</h1>
+
+    <div class="container">
+        <div class="forms-container">
+            <!-- All your forms here -->
+            <form action="/add_user" method="post" onsubmit="updateNetwork(event)">
+                <label for="user">Add User</label>
+                <input type="text" id="user" name="user" placeholder="Enter user name" required>
+                <button type="submit">Add User</button>
+            </form>
+
+            <!-- Connect Users -->
+            <form action="/connect_users" method="post" onsubmit="updateNetwork(event)">
+                <label for="user1">Connect Users</label>
+                <div class="input-group">
+                    <input type="text" id="user1" name="user1" placeholder="Enter first user name" required>
+                    <input type="text" id="user2" name="user2" placeholder="Enter second user name" required>
+                </div>
+                <button type="submit">Connect Users</button>
+            </form>
+
+            <!-- Remove User -->
+            <form action="/remove_user" method="post" onsubmit="updateNetwork(event)">
+                <label for="remove-user">Remove User</label>
+                <input type="text" id="remove-user" name="user" placeholder="Enter user name" required>
+                <button type="submit">Remove User</button>
+            </form>
+
+            <!-- Suggest Friends -->
+            <form action="/suggest_friends" method="post" onsubmit="updateNetwork(event)">
+                <label for="suggest-user">Suggest Friends</label>
+                <input type="text" id="suggest-user" name="user" placeholder="Enter user name" required>
+                <button type="submit">Suggest Friends</button>
+            </form>
+
+            <!-- Remove Connection -->
+            <form action="/remove_connection" method="post" onsubmit="updateNetwork(event)">
+                <label for="remove-user1">Remove Connection</label>
+                <div class="input-group">
+                    <input type="text" id="remove-user1" name="user1" placeholder="Enter first user name" required>
+                    <input type="text" id="remove-user2" name="user2" placeholder="Enter second user name" required>
+                </div>
+                <button type="submit">Remove Connection</button>
+            </form>
+
+            <!-- Find Shortest Path -->
+            <form action="/find_path" method="post" onsubmit="findPath(event)">
+                <label for="path-user1">Find Shortest Path</label>
+                <div class="input-group">
+                    <input type="text" id="path-user1" name="user1" placeholder="Enter first user name" required>
+                    <input type="text" id="path-user2" name="user2" placeholder="Enter second user name" required>
+                </div>
+                <button type="submit">Find Path</button>
+            </form>
+        </div>
+
+        <div class="graph-container">
+            <button id="view-network-btn" onclick="showNetwork()">View Network</button>
+            <div id="network-container" style="display:none;"></div>
+            <div id="suggestions-container" style="display:none;" class="suggestions-container"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/network.js') }}"></script>
+</body>
+</html>
